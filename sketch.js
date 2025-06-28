@@ -69,6 +69,8 @@ function draw() {
 
   timer.drawTimer();
 
+  helper.drawText("CM2030 Mid Term - Snooker", 450, 40, 22, 255, cWhite)
+  
   if (!ballLayout.gameOption) {
     helper.drawText( "To start, there are three possible play modes: ", 350, 180, 12, cWhite);
     helper.drawText('- "1" for standard starting positions layout\n- "2" for random all\n- "3" for random reds only', 350, 210, 12, cWhite);
@@ -79,10 +81,19 @@ function draw() {
       if (!gameStarted) {
         helper.drawText('Click anywhere within the D arc to place the cue ball (white)',350, 180, 12, cYellow);
       } else {
-        // helper.drawText("*** n to start\na new game", 10, 125, 12, cYellow)
         timer.startTimer();
-        helper.drawText("Instructions: ", 10, 180, 12, cWhite)
-        helper.drawText("- 'n' to start a new game", 10, 195, 12, cYellow)
+        helper.drawText("Reds Left: " + ballLayout.countReds() , 10, 275, 12, cYellow)
+        helper.drawText("Colors Left: " + ballLayout.countColors() , 10, 290, 12, cYellow)
+        helper.drawText("Consecutive Colors: " + ballLayout.consecutiveColors , 10, 305, 12, cYellow)
+        helper.drawText("Instructions: ", 250, 475, 12, cYellow)
+        helper.drawText("- 'n' to start a new game", 250, 490, 12, cYellow)
+        helper.drawText("- Right Arrow Key rotates the cue clockwise", 250, 505, 12, cYellow)
+        helper.drawText("- Left Arrow Key rotates the cue counter clockwise", 250, 520, 12, cYellow)
+        helper.drawText("- Down Arrow Key adds shot power", 250, 535, 12, cYellow)
+        helper.drawText("--- Hold and drag center of cue adds shot power", 250, 550, 12, cYellow)
+        helper.drawText("- Order is one red followed by a color", 550, 490, 12, cYellow)
+        helper.drawText("- Two colors consecutively incur a penalty of -4 points", 550, 505, 12, cYellow)
+
         if (whiteBallInPlay()) {
           table.cushionCollision(whiteBall);
           ballLayout.ballCollision(whiteBall);

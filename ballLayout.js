@@ -74,6 +74,14 @@ class BallLayout {
         };
     }
 
+    countReds() {
+        return this.balls.red.length;
+    }
+
+    countColors() {
+        return Object.keys(this.coloredBalls).length;
+    }
+
     setGameOption(gameOption) {
         this.gameOption = gameOption;
         this.createBalls(gameOption);
@@ -210,7 +218,6 @@ class BallLayout {
 
     ballInPocket() {
         let c = (255);
-        helper.drawText("consecutive colors" + this.consecutiveColors, 400, 200, 24, c);
         for (let balltype in this.balls) {
             for (let ball of this.balls[balltype]) {
                 // test for ball in field or pocket

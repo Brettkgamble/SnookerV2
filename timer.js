@@ -30,7 +30,7 @@ class Timer {
       if (this.limitMinutes + this.limitSeconds != 0) {
         helper.drawText(`Time left: ${this.limitMinutes < 10 ? "0" + this.limitMinutes : this.limitMinutes}:${
             this.limitSeconds < 10 ? "0" + this.limitSeconds : this.limitSeconds
-          }`, 10, 250, 18, cYellow)
+          }`, 10, 150, 18, cYellow)
       } else {
         helper.drawText("TIME'S UP!", 450, 200, 32, cRed);
       }
