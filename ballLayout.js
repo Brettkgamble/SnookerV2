@@ -222,7 +222,7 @@ class BallLayout {
                         this.redBallIn = true;
                         // Ball in pocket remove from red ball array
                         this.removeBall(this.balls.red, this.balls.red.indexOf(ball));
-                        scoreBoard.addScore(ball.value);
+                        scoreboard.addScore(ball.value);
                         this.target = "Colored Ball";
                     }
                     else {
@@ -238,7 +238,8 @@ class BallLayout {
                             this.foul = true;
                             let cRed = (255, 0, 0);
                             this.foulMessage = "Penalty:  Two consecutive colors sunk";
-                            scoreBoard.addScore(-4);
+                            scoreboard.addScore(-4);
+                            this.consecutiveColors = 0;
                         }
                         // If there are red balls remaining we add back the colored balls
                         // as they are sunk
@@ -256,9 +257,9 @@ class BallLayout {
                             this.won = true;
                         }
                         this.redBallIn = false;
-                        scoreBoard.addScore(ball.value);
+                        scoreboard.addScore(ball.value);
                     }
-                    // scoreBoard.addScore(ball.value)
+                    // scoreboard.addScore(ball.value)
                 }
             }
         }

@@ -2,10 +2,6 @@
 // Collision Categories
 // Only allow the cue to interact with the cue ball
 
-const CATEGORY_CUE = 0x0001;
-const CATEGORY_WHITEBALL = 0x0002;
-const CATEGORY_OTHER = 0x0003;
-
 class Cue {
   constructor() {
     // this.ball = ball;
@@ -37,7 +33,7 @@ class Cue {
       restitution: 0.4,
       collisionFilter: {
         category: CATEGORY_CUE,
-        mask: CATEGORY_WHITEBALL
+        mask: CATEGORY_WHITEBALL  // will not colide with ball?
       }
     });
     Body.setAngle(this.body, this.cueAngle);

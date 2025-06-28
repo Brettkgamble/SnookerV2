@@ -5,7 +5,10 @@ function Ball(x, y, color, value) {
     object: Bodies.circle(x, y, 400 / 72, {
       isSleeping: false,
       //disables mouse interaction with the red and colored balls
-      collisionFilter: { category: 0x0002 },
+      collisionFilter: {
+        category: CATEGORY_BALL,
+        mask: CATEGORY_CUSHION | CATEGORY_WHITEBALL | CATEGORY_BALL
+      },
       restitution: 0.9,
       friction: 0.7,
     }),

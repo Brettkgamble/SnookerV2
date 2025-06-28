@@ -6,6 +6,7 @@ let Bodies = Matter.Bodies;
 let Body = Matter.Body;
 let Constraint = Matter.Constraint;
 let Vector = Matter.Vector;
+let Collision = Matter.Collision;
 
 let engine, world;
 let ball;
@@ -15,7 +16,11 @@ let scoreboard;
 let ballLayout;
 let gameStarted = false;
 
-
+// https://reitgames.com/news/collision-filtering-phaser
+const CATEGORY_CUE = 0x0001; // binary 0001
+const CATEGORY_BALL = 0x0002; // binary 0010
+const CATEGORY_WHITEBALL = 0x0004; // binary 0100
+const CATEGORY_CUSHION = 0x0008;  // binaru 1000
 
 
 function setup() {
@@ -62,31 +67,38 @@ function draw() {
 
   table.drawTable();
 
-  fill(255);
-  noStroke();
-  ellipse(150, 460, 10);
+  timer.drawTimer();
 
   if (!ballLayout.gameOption) {
     helper.drawText( "To start, there are three possible play modes: ", 350, 180, 12, cWhite);
     helper.drawText('- "1" for standard starting positions layout\n- "2" for random all\n- "3" for random reds only', 350, 210, 12, cWhite);
   } else {
       helper.drawText("mode: " + ballLayout.gameOption, 10, 100, 14, cWhite);
-      
-      
       ballLayout.drawBalls();
-
       scoreboard.drawScore();
-      if (gameStarted) {
+      if (!gameStarted) {
+        helper.drawText('Click anywhere within the D arc to place the cue ball (white)',350, 180, 12, cYellow);
+      } else {
         // helper.drawText("*** n to start\na new game", 10, 125, 12, cYellow)
+        timer.startTimer();
         helper.drawText("Instructions: ", 10, 180, 12, cWhite)
         helper.drawText("- 'n' to start a new game", 10, 195, 12, cYellow)
-        drawWhiteBall()
-        cue.update()
-        cue.draw();
-        cue.checkForReset();
-      } else {
-        helper.drawText('Click anywhere within the D arc to place the cue ball (white)',350, 180, 12, cYellow);
-      }
+        if (whiteBallInPlay()) {
+          table.cushionCollision(whiteBall);
+          ballLayout.ballCollision(whiteBall);
+          ballLayout.ballInPocket();
+          ballLayout.checkWin();
+          drawWhiteBall()
+          cue.update()
+          cue.draw();
+          cue.checkForReset();
+        } else {
+          scoreboard.addScore(-4);
+          ballLayout.drawPenalty();
+          removeWhiteBallFromWorld();
+          gameStarted = false;
+        }
+      }     
     }
   }
 

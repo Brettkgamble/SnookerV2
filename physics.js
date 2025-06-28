@@ -7,7 +7,7 @@ function setupCueBall(x, y){
     density: 0.04,
     collisionFilter: {
         category: CATEGORY_WHITEBALL,
-        mask: CATEGORY_CUE | CATEGORY_OTHER
+        mask: CATEGORY_CUE | CATEGORY_BALL | CATEGORY_CUSHION
     }
   })
 
@@ -34,3 +34,7 @@ function whiteBallInPlay() {
   return (whiteBall.position.y >= 75 && whiteBall.position.y <= 445 &&
           whiteBall.position.x >= 165 && whiteBall.position.x <= 935)
 }
+
+ function removeWhiteBallFromWorld() {
+    World.remove(engine.world, [whiteBall])
+  }

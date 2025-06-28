@@ -51,8 +51,8 @@ class Table {
         isStatic: true,
         restitution: this.cushionResitution,
         collisionFilter: {
-          category: CATEGORY_OTHER,
-          mask: CATEGORY_WHITEBALL
+          category: CATEGORY_CUSHION,
+          mask: CATEGORY_WHITEBALL | CATEGORY_BALL
         }
         })
       );
@@ -63,8 +63,8 @@ class Table {
         isStatic: true,
         restitution: this.cushionResitution,
         collisionFilter: {
-          category: CATEGORY_OTHER,
-          mask: CATEGORY_WHITEBALL
+          category: CATEGORY_CUSHION,
+          mask: CATEGORY_WHITEBALL | CATEGORY_BALL
         }
         })
       );
@@ -76,8 +76,8 @@ class Table {
         restitution: this.cushionResitution,
         angle: Math.PI/2,
         collisionFilter: {
-          category: CATEGORY_OTHER,
-          mask: CATEGORY_WHITEBALL
+          category: CATEGORY_CUSHION,
+          mask: CATEGORY_WHITEBALL | CATEGORY_BALL
         }
         })
       );
@@ -88,8 +88,8 @@ class Table {
         isStatic: true,
         restitution: this.cushionResitution,
         collisionFilter: {
-          category: CATEGORY_OTHER,
-          mask: CATEGORY_WHITEBALL
+          category: CATEGORY_CUSHION,
+          mask: CATEGORY_WHITEBALL | CATEGORY_BALL
         }
         })
       );
@@ -100,8 +100,8 @@ class Table {
         isStatic: true,
         restitution: this.cushionResitution,
         collisionFilter: {
-          category: CATEGORY_OTHER,
-          mask: CATEGORY_WHITEBALL 
+          category: CATEGORY_CUSHION,
+          mask: CATEGORY_WHITEBALL | CATEGORY_BALL
         }
         })
       );
@@ -113,8 +113,8 @@ class Table {
         restitution: this.cushionResitution,
         angle: -Math.PI/2,
         collisionFilter: {
-          category: CATEGORY_OTHER,
-          mask: CATEGORY_WHITEBALL 
+          category: CATEGORY_CUSHION,
+          mask: CATEGORY_WHITEBALL | CATEGORY_BALL
         }
         })
       );
