@@ -10,9 +10,10 @@ class Cue {
   constructor() {
     // this.ball = ball;
 
-     this.visible = true;
-     this.alpha = 255;
-     this.fadingOut = false;
+    this.visible = true;
+    this.alpha = 255;
+    this.fadingOut = false;
+    this.powerAlpha = 0;
     this.minDistance = 60;
     this.maxDistance = 120;
     this.cueDistance = 72;
@@ -67,7 +68,7 @@ class Cue {
     if (!this.constraintRemoved && !this.isDragging) {
       // console.log('cue.update')
       let pos = this.getPosition();
-      console.log('cue.update, position', pos)
+      // console.log('cue.update, position', pos)
       Body.setPosition(this.body, pos);
       Body.setAngle(this.body, this.cueAngle);
       this.constraint.pointB = pos;
@@ -157,7 +158,7 @@ class Cue {
 
   drawPowerBar() {
     const x = 20, y = 20, w = 200, h = 20;
-    let powerPercent = map(this.cueDistance - 20, this.minDistance, this.maxDistance, 0, 1, true);
+    let powerPercent = map(this.cueDistance - 21, this.minDistance, this.maxDistance, 0, 1, true);
 
     fill(50);
     rect(x, y, w, h, 5);
@@ -193,8 +194,10 @@ class Cue {
   }
 
   onKeyPressed(k) {
+    
     const angleStep = 0.05;
     const drawStep = 3;
+    
 
     if (!this.constraintRemoved && !this.isDragging) {
       if (k === 37) {  // Left Arrow Key
@@ -207,6 +210,8 @@ class Cue {
         this.strike();  // enter key
       }
     }
+
+  
   }
 
   strike() {

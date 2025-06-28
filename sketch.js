@@ -11,6 +11,8 @@ let engine, world;
 let ball;
 let cue;
 let table;
+let scoreboard;
+let ballLayout;
 let gameStarted = false;
 
 
@@ -43,6 +45,8 @@ function setup() {
      It includes the slab, rails, cushions and pockets
   */
   table = new Table();
+  ballLayout = new BallLayout(800, 400 / 72);
+  scoreboard = new ScoreBoard()
   timer = new Timer();
   // cue = new Cue();
   helper = new Helper();
@@ -54,6 +58,7 @@ function draw() {
   Engine.update(engine);
 
   const cYellow = color(255, 255, 0);
+  const cWhite = color(255, 255, 255);
 
   table.drawTable();
 
@@ -61,17 +66,31 @@ function draw() {
   noStroke();
   ellipse(150, 460, 10);
 
-  if (gameStarted) {
-    drawWhiteBall()
-    cue.update()
-    cue.draw();
-    cue.checkForReset();
+  if (!ballLayout.gameOption) {
+    helper.drawText( "To start, there are three possible play modes: ", 350, 180, 12, cWhite);
+    helper.drawText('- "1" for standard starting positions layout\n- "2" for random all\n- "3" for random reds only', 350, 210, 12, cWhite);
   } else {
-    helper.drawText('Click anywhere with the D arc to place the cue ball (white)',350, 180, 12, cYellow);
-  }
-}
+      helper.drawText("mode: " + ballLayout.gameOption, 10, 100, 14, cWhite);
+      
+      
+      ballLayout.drawBalls();
 
-function mousePressed() {
+      scoreboard.drawScore();
+      if (gameStarted) {
+        // helper.drawText("*** n to start\na new game", 10, 125, 12, cYellow)
+        helper.drawText("Instructions: ", 10, 180, 12, cWhite)
+        helper.drawText("- 'n' to start a new game", 10, 195, 12, cYellow)
+        drawWhiteBall()
+        cue.update()
+        cue.draw();
+        cue.checkForReset();
+      } else {
+        helper.drawText('Click anywhere within the D arc to place the cue ball (white)',350, 180, 12, cYellow);
+      }
+    }
+  }
+
+  function mousePressed() {
   if (!gameStarted) {
       // Determine if mouse up is within the D Zone Arc
       if (dist(mouseX, mouseY, 150 + table.tableLength / 5, table.tableStartY + table.tableWidth/2) < 75 && mouseX < 310) {
@@ -84,8 +103,22 @@ function mousePressed() {
   }
 }
 
-  function keyPressed(e) {
+function keyPressed(e) {
+  
   // Prevent arrow keys and Enter from scrolling the page
+  if (key.toLowerCase() === "1") {
+    ballLayout.setGameOption("standard");
+  }
+  if (key.toLowerCase() === "2") {
+    ballLayout.setGameOption("unordered");
+  }
+  if (key.toLowerCase() === "3") {
+    ballLayout.setGameOption("random");
+  }
+  if (key.toLowerCase() === "n") {
+    window.location.reload();
+  }
+
   if ([LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, ENTER].includes(keyCode)) {
     e.preventDefault();
   }
@@ -98,6 +131,5 @@ function mouseReleased() {
 }
 
 function mouseDragged() {
-  console.log('Dragging')
 if (cue) cue.onMouseDragged();
 }
