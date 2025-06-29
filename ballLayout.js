@@ -17,7 +17,7 @@ class BallLayout {
     this.gameOption = "";
     this.target = "Red Ball";   // Initial target ball type
     this.won = false;
-    this.foul = true;
+    this.foul = false;
     this.penalty = false;
     this.penaltyMessage = "";
     this.ballCollided = false;
@@ -287,27 +287,27 @@ class BallLayout {
    * Handles foul logic if a red ball is incorrectly hit or sunk.
    * Old code. no longer used
    */
-  redBallsCollided() {
+  /* redBallsCollided() {
     if ((this.redBallIn || this.ballCollided === "color") && !this.foul) {
       this.foul = true;
       this.foulMessage = "Red ball hit";
     }
     this.redBallIn = true;
     this.ballCollided = "red";
-  }
+  } */
 
   /**
    * Handles foul logic if a colored ball is incorrectly hit or sunk.
    * old code no longer used
    */
-  coloredBallsCollided() {
-    if ((!this.redBallIn || this.balls.red.length !== 0) && !this.foul) {
-      this.foul = true;
-      this.foulMessage = "Colored ball hit";
-    }
-    this.redBallIn = false;
-    this.ballCollided = "color";
-  }
+  // coloredBallsCollided() {
+  //   if ((!this.redBallIn || this.balls.red.length !== 0) && !this.foul) {
+  //     this.foul = true;
+  //     this.foulMessage = "Colored ball hit";
+  //   }
+  //   this.redBallIn = false;
+  //   this.ballCollided = "color";
+  // }
 
   /**
    * Detects if the white ball has collided with any target ball.

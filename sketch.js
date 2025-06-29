@@ -189,7 +189,7 @@ function draw() {
       // Gameplay execution
       if (whiteBallInPlay()) {
         table.cushionCollision(whiteBall);
-        ballLayout.ballCollision(whiteBall);
+        // ballLayout.ballCollision(whiteBall);
         ballLayout.ballInPocket();
         ballLayout.checkWin();
         drawWhiteBall();

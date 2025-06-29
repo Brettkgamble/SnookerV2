@@ -53,7 +53,7 @@ class Helper {
         let cRed = color(255, 0, 0)
         if (ballLayout.foul) {
             console.log('This is a foul')
-            this.drawText("Penalty! 2 consecutive colors potted: ", 350, 100, 18, cRed, 3);
+            this.drawText("Penalty! 2 consecutive colors potted: ", 350, 100, 18, cRed);
             // reset the foul flag after 3 seconds
             setTimeout(() => {
                ballLayout.foul = false;    
